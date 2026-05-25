@@ -4,6 +4,13 @@ import { getDevelopers } from '../api/index.js';
 
 const BACKEND_URL = 'http://localhost:5001';
 
+// Cloudinary returns full https:// URLs; old local images start with /uploads/
+const getImageSrc = (url) => {
+  if (!url) return '';
+  if (/^https?:\/\//i.test(url)) return url;  // Cloudinary full URL
+  return `${BACKEND_URL}${url}`;               // Legacy local path
+};
+
 const getAbsoluteUrl = (url) => {
   if (!url) return '';
   if (/^https?:\/\//i.test(url)) return url;
@@ -23,7 +30,7 @@ const DeveloperCard = ({ name, image, qualification, specialization, projectsHan
     <div className="relative w-28 h-28 rounded-full overflow-hidden border-4 border-dark group-hover:border-teal transition-all duration-500 bg-dark/60 shadow-xl mb-6 mt-4 shrink-0">
       {image ? (
         <img
-          src={`${BACKEND_URL}${image}`}
+          src={getImageSrc(image)}
           alt={name}
           className="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-700"
         />

@@ -3,6 +3,11 @@ import { getAllServicesAdmin, createService, updateService, deleteService, getDe
 import { Plus, Pencil, Trash2, X, ToggleLeft, ToggleRight, Upload, Image } from 'lucide-react';
 
 const BACKEND_URL = 'http://localhost:5001';
+const getImageSrc = (url) => {
+  if (!url) return '';
+  if (/^https?:\/\//i.test(url)) return url;
+  return `${BACKEND_URL}${url}`;
+};
 const ICONS = ['BookOpen', 'Cpu', 'Settings', 'ShoppingBag', 'Globe', 'User', 'Layers'];
 const EMPTY = {
   title: '', description: '', longDescription: '', icon: 'Globe',
@@ -49,7 +54,7 @@ const ServicesPage = () => {
       projects: s.projects || [],
       assignedDevelopers: (s.assignedDevelopers || []).map(d => d._id || d),
     });
-    setImagePreview(s.image ? `${BACKEND_URL}${s.image}` : '');
+    setImagePreview(s.image ? getImageSrc(s.image) : '');
     setImageFile(null);
     setProj({ title: '', description: '' });
     setEditId(s._id);
@@ -138,7 +143,7 @@ const ServicesPage = () => {
               {/* Service thumbnail */}
               <div className="w-12 h-12 shrink-0 overflow-hidden bg-dark/60 border border-light/10">
                 {s.image ? (
-                  <img src={`${BACKEND_URL}${s.image}`} alt={s.title} className="w-full h-full object-cover" />
+                  <img src={getImageSrc(s.image)} alt={s.title} className="w-full h-full object-cover" />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center">
                     <Image size={18} className="text-light/20" />

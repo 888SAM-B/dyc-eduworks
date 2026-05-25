@@ -3,6 +3,11 @@ import { getDevelopers, createDeveloper, updateDeveloper, deleteDeveloper } from
 import { Plus, Pencil, Trash2, X, Upload } from 'lucide-react';
 
 const BACKEND_URL = 'http://localhost:5001';
+const getImageSrc = (url) => {
+  if (!url) return '';
+  if (/^https?:\/\//i.test(url)) return url;
+  return `${BACKEND_URL}${url}`;
+};
 const EMPTY_FORM = { name: '', qualification: '', specialization: '', projectsHandled: 0, bio: '', order: 0, portfolioUrl: '', email: '' };
 
 const DevelopersPage = () => {
@@ -38,7 +43,7 @@ const DevelopersPage = () => {
       projectsHandled: dev.projectsHandled, bio: dev.bio || '', order: dev.order || 0,
       portfolioUrl: dev.portfolioUrl || '', email: dev.email || '',
     });
-    setImagePreview(dev.image ? `${BACKEND_URL}${dev.image}` : '');
+    setImagePreview(dev.image ? getImageSrc(dev.image) : '');
     setImageFile(null); setEditingId(dev._id); setError(''); setModalOpen(true);
   };
 
@@ -97,7 +102,7 @@ const DevelopersPage = () => {
             <div key={dev._id} className="bg-medium border border-light/5 overflow-hidden group">
               <div className="h-40 bg-dark/50 relative overflow-hidden">
                 {dev.image ? (
-                  <img src={`${BACKEND_URL}${dev.image}`} alt={dev.name} className="w-full h-full object-cover object-top" />
+                  <img src={getImageSrc(dev.image)} alt={dev.name} className="w-full h-full object-cover object-top" />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center text-5xl font-black text-teal/20">
                     {dev.name.charAt(0)}

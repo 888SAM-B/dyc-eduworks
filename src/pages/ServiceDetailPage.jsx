@@ -8,6 +8,13 @@ import Footer from '../components/Footer.jsx';
 
 const BACKEND_URL = 'http://localhost:5001';
 
+// Cloudinary returns full https:// URLs; old local images start with /uploads/
+const getImageSrc = (url) => {
+  if (!url) return '';
+  if (/^https?:\/\//i.test(url)) return url;  // Cloudinary full URL
+  return `${BACKEND_URL}${url}`;               // Legacy local path
+};
+
 const getAbsoluteUrl = (url) => {
   if (!url) return '';
   if (/^https?:\/\//i.test(url)) return url;
@@ -84,7 +91,7 @@ const ServiceDetailPage = () => {
                     <div className="absolute -top-3 -left-3 w-12 h-12 border-t-2 border-l-2 border-teal z-10 pointer-events-none" />
                     <div className="absolute -bottom-3 -right-3 w-12 h-12 border-b-2 border-r-2 border-teal z-10 pointer-events-none" />
                     <img
-                      src={`${BACKEND_URL}${service.image}`}
+                      src={getImageSrc(service.image)}
                       alt={`${service.title} illustration`}
                       className="w-full object-cover object-center"
                       style={{ aspectRatio: '3 / 4' }}
@@ -194,7 +201,7 @@ const ServiceDetailPage = () => {
                   {/* Circular Avatar */}
                   <div className="relative w-24 h-24 rounded-full overflow-hidden border-4 border-dark group-hover:border-teal transition-all duration-500 bg-dark/60 shadow-lg mb-4 mt-2 shrink-0">
                     {dev.image ? (
-                      <img src={`${BACKEND_URL}${dev.image}`} alt={dev.name} className="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-700" />
+                      <img src={getImageSrc(dev.image)} alt={dev.name} className="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-700" />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center">
                         <div className="text-3xl font-black text-teal/30">

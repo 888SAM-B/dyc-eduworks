@@ -1,35 +1,9 @@
 import express from 'express';
 import Service from '../models/Service.js';
 import authMiddleware from '../middleware/authMiddleware.js';
-import multer from 'multer';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import { createUpload } from '../config/cloudinary.js';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, path.join(__dirname, '../uploads/'));
-  },
-  filename: (req, file, cb) => {
-    const uniqueName = `service_${Date.now()}${path.extname(file.originalname)}`;
-    cb(null, uniqueName);
-  },
-});
-
-const upload = multer({
-  storage,
-  limits: { fileSize: 5 * 1024 * 1024 }, // 5MB
-  fileFilter: (req, file, cb) => {
-    const allowed = /jpeg|jpg|png|webp/;
-    const ext = allowed.test(path.extname(file.originalname).toLowerCase());
-    const mime = allowed.test(file.mimetype);
-    if (ext && mime) return cb(null, true);
-    cb(new Error('Only image files allowed'));
-  },
-});
-
+const upload = createUpload('services');
 const router = express.Router();
 
 // GET all active services (public)
@@ -78,7 +52,8 @@ router.post('/', authMiddleware, upload.single('image'), async (req, res) => {
       try { assignedDevelopers = JSON.parse(assignedDevelopers); } catch (e) { assignedDevelopers = []; }
     }
 
-    const image = req.file ? `/uploads/${req.file.filename}` : '';
+    // Cloudinary returns the full CDN URL in req.file.path
+    const image = req.file ? req.file.path : '';
     
     const service = new Service({
       title,
@@ -123,7 +98,7 @@ router.put('/:id', authMiddleware, upload.single('image'), async (req, res) => {
     };
     
     if (req.file) {
-      updateData.image = `/uploads/${req.file.filename}`;
+      updateData.image = req.file.path; // Cloudinary CDN URL
     }
 
     const service = await Service.findByIdAndUpdate(req.params.id, updateData, { new: true, runValidators: true });
