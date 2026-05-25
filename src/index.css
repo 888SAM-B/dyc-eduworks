@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@500;600;700;800&display=swap');
+
+@import "tailwindcss";
+
+@theme {
+  --color-dark: #222831;
+  --color-medium: #393E46;
+  --color-teal: #00ADB5;
+  --color-light: #EEEEEE;
+
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-heading: 'Montserrat', sans-serif;
+}
+
+:root {
+  background-color: #222831;
+  color: #EEEEEE;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #222831;
+}
+::-webkit-scrollbar-thumb {
+  background: #393E46;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #00ADB5;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.glass-card {
+  background: rgba(57, 62, 70, 0.4);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(238, 238, 238, 0.1);
+}
