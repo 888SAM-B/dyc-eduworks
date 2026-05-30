@@ -7,6 +7,7 @@ import Services from '../components/Services.jsx';
 import Developers from '../components/Developers.jsx';
 import ContactForm from '../components/ContactForm.jsx';
 import Footer from '../components/Footer.jsx';
+import Counter from '../components/Counter.jsx';
 
 const HomePage = () => {
   useEffect(() => {
@@ -14,7 +15,7 @@ const HomePage = () => {
   }, []);
 
   return (
-    <div className="bg-dark text-light min-h-screen">
+    <div className="bg-dark text-light min-h-screen overflow-x-hidden">
       <Navbar />
       <Hero />
       <Services />
@@ -24,11 +25,11 @@ const HomePage = () => {
       <section id="about" className="py-24 px-6 bg-medium/20">
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
           <div data-aos="fade-right">
-            <div className="relative p-12 border border-teal/20">
+            <div className="relative p-6 sm:p-8 md:p-12 border border-teal/20">
               <div className="absolute -top-6 -right-6 w-32 h-32 bg-teal/5 -z-10" />
               <h2 className="text-sm font-bold text-teal tracking-[0.3em] uppercase mb-4">Our Mission</h2>
-              <h3 className="text-4xl font-extrabold mb-6">Bridging Academia and Industry</h3>
-              <p className="text-light/60 mb-6 leading-relaxed">
+              <h3 className="text-3xl md:text-4xl font-extrabold mb-6">Bridging Academia and Industry</h3>
+              <p className="text-light/60 mb-6 leading-relaxed text-sm md:text-base">
                 DYC EDUWORKS was founded with a single goal: to empower students and businesses with high-quality technical solutions. We don't just build software; we build foundations for success.
               </p>
               <ul className="space-y-4">
@@ -42,8 +43,8 @@ const HomePage = () => {
             </div>
           </div>
           <div data-aos="fade-left">
-            <h2 className="text-8xl font-black text-light/5 leading-none mb-4">ABOUT</h2>
-            <p className="text-xl text-light/80 border-l-4 border-teal pl-6 py-2 mb-6">
+            <h2 className="text-6xl sm:text-7xl md:text-8xl font-black text-light/5 leading-none mb-4">ABOUT</h2>
+            <p className="text-lg md:text-xl text-light/80 border-l-4 border-teal pl-6 py-2 mb-6">
               We are a team of dedicated developers and mentors committed to technical excellence and professional growth.
             </p>
             <div className="grid grid-cols-2 gap-6 mt-8">
@@ -53,8 +54,10 @@ const HomePage = () => {
                 { num: '6+', label: 'Services Offered' },
                 { num: '3+', label: 'Years Experience' },
               ].map((stat, i) => (
-                <div key={i} className="border border-light/10 p-5">
-                  <div className="text-3xl font-black text-teal mb-1">{stat.num}</div>
+                <div key={i} className="border border-light/10 p-5 hover:border-teal/30 hover:bg-medium/10 transition-all duration-300 group">
+                  <div className="text-3xl font-black text-teal mb-1 group-hover:scale-105 transition-transform duration-300 origin-left">
+                    <Counter value={stat.num} />
+                  </div>
                   <div className="text-xs text-light/40 uppercase tracking-widest">{stat.label}</div>
                 </div>
               ))}

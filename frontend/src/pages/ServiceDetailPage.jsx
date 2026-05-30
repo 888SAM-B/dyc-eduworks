@@ -56,7 +56,7 @@ const ServiceDetailPage = () => {
   );
 
   return (
-    <div className="bg-dark text-light min-h-screen">
+    <div className="bg-dark text-light min-h-screen overflow-x-hidden">
       <Navbar />
 
       {/* Hero Banner */}
@@ -93,7 +93,7 @@ const ServiceDetailPage = () => {
                     <img
                       src={getImageSrc(service.image)}
                       alt={`${service.title} illustration`}
-                      className="w-full object-cover object-center"
+                      className="w-full object-contain object-center"
                       style={{ aspectRatio: '3 / 4' }}
                     />
                     <div className="absolute inset-0 bg-gradient-to-tr from-dark/30 to-transparent pointer-events-none" />
@@ -143,10 +143,10 @@ const ServiceDetailPage = () => {
               {service.projects.map((project, i) => {
                 const CardWrapper = project.url
                   ? ({ children }) => (
-                      <a href={getAbsoluteUrl(project.url)} target="_blank" rel="noreferrer" className="block">
-                        {children}
-                      </a>
-                    )
+                    <a href={getAbsoluteUrl(project.url)} target="_blank" rel="noreferrer" className="block">
+                      {children}
+                    </a>
+                  )
                   : ({ children }) => <div>{children}</div>;
 
                 return (

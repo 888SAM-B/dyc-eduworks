@@ -41,7 +41,7 @@ const Typewriter = ({ words, typingSpeed = 100, deletingSpeed = 60, delay = 2000
 };
 
 const Hero = () => (
-  <section id="home" className="min-h-screen flex items-center justify-center pt-20 px-6">
+  <section id="home" className="pt-32 pb-16 md:py-0 min-h-[70vh] md:min-h-screen flex items-center justify-center px-6">
     <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center w-full">
       <div data-aos="fade-right" data-aos-duration="1000">
         <p className="text-sm font-bold text-teal tracking-[0.3em] uppercase mb-6 min-h-[24px] flex items-center">
@@ -65,7 +65,7 @@ const Hero = () => (
         </div>
       </div>
 
-      <div className="relative" data-aos="fade-left" data-aos-duration="1000">
+      <div className="hidden md:block relative" data-aos="fade-left" data-aos-duration="1000">
         <div className="w-full h-[400px] md:h-[500px] border border-teal/20 relative overflow-hidden group">
           <div className="absolute inset-0 bg-teal/5 group-hover:bg-teal/10 transition-colors duration-500" />
           <div className="absolute top-10 right-10 w-32 h-32 border border-teal/20" />
