@@ -1,11 +1,52 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { ChevronRight } from 'lucide-react';
+
+const Typewriter = ({ words, typingSpeed = 100, deletingSpeed = 60, delay = 2000 }) => {
+  const [currentWordIndex, setCurrentWordIndex] = useState(0);
+  const [currentText, setCurrentText] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    let timer;
+    const fullWord = words[currentWordIndex];
+
+    if (isDeleting) {
+      timer = setTimeout(() => {
+        setCurrentText((prev) => prev.slice(0, -1));
+      }, deletingSpeed);
+    } else {
+      timer = setTimeout(() => {
+        setCurrentText((prev) => fullWord.slice(0, prev.length + 1));
+      }, typingSpeed);
+    }
+
+    if (!isDeleting && currentText === fullWord) {
+      timer = setTimeout(() => setIsDeleting(true), delay);
+    }
+
+    if (isDeleting && currentText === '') {
+      setIsDeleting(false);
+      setCurrentWordIndex((prev) => (prev + 1) % words.length);
+    }
+
+    return () => clearTimeout(timer);
+  }, [currentText, isDeleting, currentWordIndex, words, typingSpeed, deletingSpeed, delay]);
+
+  return (
+    <span className="inline-flex items-center">
+      <span>{currentText}</span>
+      <span className="w-[3px] h-[0.9em] bg-teal ml-1 animate-pulse" style={{ display: 'inline-block', verticalAlign: 'middle' }}></span>
+    </span>
+  );
+};
 
 const Hero = () => (
   <section id="home" className="min-h-screen flex items-center justify-center pt-20 px-6">
     <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center w-full">
       <div data-aos="fade-right" data-aos-duration="1000">
-        <p className="text-sm font-bold text-teal tracking-[0.3em] uppercase mb-6">Technology · Education · Growth</p>
+        <p className="text-sm font-bold text-teal tracking-[0.3em] uppercase mb-6 min-h-[24px] flex items-center">
+          <Typewriter words={["Technology", "Education", "Growth"]} />
+        </p>
         <h1 className="text-5xl md:text-7xl font-extrabold leading-tight mb-6">
           Empowering <br />
           <span className="text-teal">Digital Future</span> <br />

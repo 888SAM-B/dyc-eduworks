@@ -6,7 +6,7 @@ import 'aos/dist/aos.css';
 import Navbar from '../components/Navbar.jsx';
 import Footer from '../components/Footer.jsx';
 
-const BACKEND_URL = 'http://localhost:5001';
+const BACKEND_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5001';
 
 // Cloudinary returns full https:// URLs; old local images start with /uploads/
 const getImageSrc = (url) => {

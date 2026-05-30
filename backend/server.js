@@ -29,6 +29,8 @@ app.get('/api/health', (req, res) => res.json({ status: 'ok', message: 'DYC EDUW
 
 const PORT = process.env.PORT || 5001;
 
+app.get('/', (req, res) => res.json({ status: 'ok', message: 'DYC EDUWORKS API running' }));
+
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {

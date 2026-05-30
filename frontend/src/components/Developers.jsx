@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ExternalLink, Mail } from 'lucide-react';
 import { getDevelopers } from '../api/index.js';
 
-const BACKEND_URL = 'http://localhost:5001';
+const BACKEND_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5001';
 
 // Cloudinary returns full https:// URLs; old local images start with /uploads/
 const getImageSrc = (url) => {

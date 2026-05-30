@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { getDevelopers, createDeveloper, updateDeveloper, deleteDeveloper } from '../../api/index.js';
 import { Plus, Pencil, Trash2, X, Upload } from 'lucide-react';
 
-const BACKEND_URL = 'http://localhost:5001';
+const BACKEND_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5001';
 const getImageSrc = (url) => {
   if (!url) return '';
   if (/^https?:\/\//i.test(url)) return url;
