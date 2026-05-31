@@ -31,11 +31,7 @@ const Footer = () => (
           <li className="flex items-center gap-2"><Mail size={15} className="text-teal shrink-0" /> dyceduworks@gmail.com</li>
           <li className="flex items-center gap-2"><Globe size={15} className="text-teal shrink-0" /> dyceduworks.netlify.app</li>
         </ul>
-        <div className="mt-8">
-          <Link to="/admin" className="text-xs text-light/20 hover:text-teal transition-colors tracking-widest uppercase">
-            Admin Panel →
-          </Link>
-        </div>
+
       </div>
     </div>
 
