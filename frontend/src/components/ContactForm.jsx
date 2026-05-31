@@ -39,7 +39,7 @@ const ContactForm = () => {
 
       <div className="max-w-7xl mx-auto">
         <div className="grid lg:grid-cols-12 gap-16 items-start">
-          
+
           {/* Left Column: Direct info & CTA statement */}
           <div className="lg:col-span-5" data-aos="fade-right">
             <p className="text-sm font-bold text-teal tracking-[0.3em] uppercase mb-4">Let's Connect</p>
@@ -69,8 +69,8 @@ const ContactForm = () => {
                 </div>
                 <div>
                   <h4 className="text-xs font-bold text-light/40 uppercase tracking-widest">Website</h4>
-                  <a href="https://www.dyceduworks.com" target="_blank" rel="noreferrer" className="text-light hover:text-teal font-medium transition-colors">
-                    www.dyceduworks.com
+                  <a href="https://dyceduworks.netlify.app" target="_blank" rel="noreferrer" className="text-light hover:text-teal font-medium transition-colors">
+                    dyceduworks.netlify.app
                   </a>
                 </div>
               </div>
@@ -84,11 +84,10 @@ const ContactForm = () => {
               <p className="text-light/40 text-sm mb-8">Fill out the form below and we will get back to you shortly.</p>
 
               {status.text && (
-                <div className={`flex items-start gap-3 p-4 mb-6 text-sm border ${
-                  status.type === 'success'
+                <div className={`flex items-start gap-3 p-4 mb-6 text-sm border ${status.type === 'success'
                     ? 'bg-teal/5 border-teal/30 text-teal'
                     : 'bg-red-500/5 border-red-500/30 text-red-400'
-                }`}>
+                  }`}>
                   {status.type === 'success' ? (
                     <CheckCircle size={18} className="shrink-0 mt-0.5" />
                   ) : (

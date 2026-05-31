@@ -5,6 +5,7 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import Navbar from '../components/Navbar.jsx';
 import Footer from '../components/Footer.jsx';
+import TiltedCard from '../components/TiltedCard.jsx';
 
 const BACKEND_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5001';
 
@@ -27,6 +28,13 @@ const ServiceDetailPage = () => {
   const [service, setService] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     AOS.init({ duration: 900, once: true, easing: 'ease-out-cubic' });
@@ -83,20 +91,25 @@ const ServiceDetailPage = () => {
           <div className="max-w-7xl mx-auto">
             <div className="grid md:grid-cols-5 gap-16 items-center">
 
-              {/* Left — Illustration (2/5 width, vertical portrait) */}
-              <div data-aos="fade-right" className="md:col-span-2 relative">
+              <div data-aos="fade-right" className="md:col-span-2 relative flex items-center justify-center py-6">
                 {service.image ? (
-                  <div className="relative overflow-hidden rounded-sm">
+                  <div className="relative">
                     {/* Decorative corner accents */}
                     <div className="absolute -top-3 -left-3 w-12 h-12 border-t-2 border-l-2 border-teal z-10 pointer-events-none" />
                     <div className="absolute -bottom-3 -right-3 w-12 h-12 border-b-2 border-r-2 border-teal z-10 pointer-events-none" />
-                    <img
-                      src={getImageSrc(service.image)}
-                      alt={`${service.title} illustration`}
-                      className="w-full object-contain object-center"
-                      style={{ aspectRatio: '3 / 4' }}
+                    
+                    <TiltedCard
+                      imageSrc={getImageSrc(service.image)}
+                      altText={`${service.title} illustration`}
+                      captionText={service.title}
+                      containerHeight={isMobile ? '400px' : '500px'}
+                      containerWidth={isMobile ? '300px' : '375px'}
+                      imageHeight={isMobile ? '400px' : '500px'}
+                      imageWidth={isMobile ? '300px' : '375px'}
+                      showMobileWarning={false}
+                      showTooltip={true}
+                      scaleOnHover={1.05}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-tr from-dark/30 to-transparent pointer-events-none" />
                   </div>
                 ) : (
                   /* Decorative fallback when no image — vertical portrait */
