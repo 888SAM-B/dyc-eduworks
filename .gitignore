@@ -12,6 +12,9 @@ dist
 dist-ssr
 *.local
 
+change-password.js
+seed.js
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
