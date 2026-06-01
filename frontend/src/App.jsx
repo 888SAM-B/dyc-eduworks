@@ -34,7 +34,7 @@ function App() {
           {/* Admin login */}
           <Route path="/admin" element={<LoginPage />} />
 
-          {/* Admin panel (protected) */}
+          {/* Admin panel (protected) 
           <Route
             path="/admin"
             element={
@@ -42,7 +42,7 @@ function App() {
                 <AdminLayout />
               </ProtectedRoute>
             }
-          >
+          > */}
             <Route path="dashboard" element={<DashboardPage />} />
             <Route path="developers" element={<DevelopersPage />} />
             <Route path="services" element={<ServicesPage />} />
