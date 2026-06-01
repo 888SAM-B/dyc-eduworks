@@ -54,7 +54,7 @@ const Hero = () => (
           with Precision.
         </h1>
         <p className="text-light/60 text-lg mb-8 max-w-lg">
-          DYC EDUWORKS provides cutting-edge technology solutions and academic guidance to bridge the gap between learning and industry excellence.
+          <strong>DYC EDUWORKS </strong> is a leading technology company, providing premium engineering solutions, professional web development, and expert academic project guidance.
         </p>
         <div className="flex flex-wrap gap-4">
           <a href="#services" className="bg-teal text-dark px-8 py-4 font-bold hover:bg-light transition-all duration-300 flex items-center group">

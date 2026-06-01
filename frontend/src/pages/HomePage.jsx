@@ -30,7 +30,7 @@ const HomePage = () => {
               <h2 className="text-sm font-bold text-teal tracking-[0.3em] uppercase mb-4">Our Mission</h2>
               <h3 className="text-3xl md:text-4xl font-extrabold mb-6">Bridging Academia and Industry</h3>
               <p className="text-light/60 mb-6 leading-relaxed text-sm md:text-base">
-                DYC EDUWORKS was founded with a single goal: to empower students and businesses with high-quality technical solutions. We don't just build software; we build foundations for success.
+                Established as a professional tech company in Salem, <strong>DYC EDUWORKS (Decode Your Course)</strong> was founded with a single goal: to empower students and businesses with robust software solutions and expert technical mentorship.
               </p>
               <ul className="space-y-4">
                 {['Expert Mentorship', 'Modern Tech Stacks', 'Scalable Architecture', 'Professional Design'].map((item, i) => (
